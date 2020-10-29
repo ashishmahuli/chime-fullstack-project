@@ -26,6 +26,10 @@ To save you time we have written some boilerplate and example code for you. You 
 
 Getting started instructions for the frontend and backend can be found in the readme's in the `/frontend` and `/backend` directories.
 
+### Backend Extra Credit (for backend only submissions)
+
+This is **not** part of the full stack project. If you're doing a backend only project, please implement all **CRUD** operations for `menu items` and `tags` in your REST API.
+
 ### Submission
 
 Please create a public repository on GitHub and email `eric@chimemenu.com` a link to the repository.
