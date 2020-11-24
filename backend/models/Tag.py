@@ -13,4 +13,5 @@ class Tag(db.Model):
 
 class TagSchema(ma.Schema):
     class Meta:
-        fields = ("tag_id", "tag_name", "items")
+        fields = ("tag_id", "tag_name" )
+        #fields = ("tag_id", "tag_name", "items") 

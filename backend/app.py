@@ -75,7 +75,6 @@ def addItems():
     return jsonify(item_schema.dump(newItem))
 
 
-
 with app.app_context():
 	db.create_all()
 

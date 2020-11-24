@@ -56,6 +56,7 @@ export default function ExampleComponent(props){
 
    return (
     <>
+
     <div>
       <TextField 
         label = "New Item"
@@ -77,7 +78,7 @@ export default function ExampleComponent(props){
       >
         Add Item
       </Button>
-    </div>
+   </div>
 
 
     <div>
@@ -96,11 +97,14 @@ export default function ExampleComponent(props){
 
     </div>
 
-
+      <div>
       <h1>Items</h1>
       {items.map((item) => 
         <p>{item.item_name}</p>
       )}
+      </div>
+
+    
 
     </>
   );
