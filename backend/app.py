@@ -62,9 +62,16 @@ def getAllItems():
 def addItems():
     
     itemName = request.json["item_name"]
+    tagName = request.json["tag_name"]
     newItem = Item(item_name = itemName)
-    db.session.add(newItem)
+    if tagName != "":
+        tag = db.session.query(Tag).filter_by(tag_name = tagName).first()
+        tag.items.append(newItem)
+    else:
+        db.session.add(newItem)
+        
     db.session.commit()
+
     return jsonify(item_schema.dump(newItem))
 
 
