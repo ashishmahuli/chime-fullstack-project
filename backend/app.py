@@ -35,31 +35,33 @@ def ExampleEndpoint():
     }, 200
 
 
-@app.route("/tags/all", methods = ["GET"])
+@app.route("/tags_all", methods = ["GET"])
 def getAllTags():
     tagList = db.session.query(Tag).all()
     result = tags_schema.dump(tagList)
     return jsonify(result)
 
 
-@app.route("/tags/add", methods = ["POST"])
+@app.route("/tags_add", methods = ["POST"])
 def addTag():
-    tagName = request.form["tag_name"]
+    tagName = request.json["tag_name"]
     newTag = Tag(tag_name = tagName)
     db.session.add(newTag)
     db.session.commit()
     return jsonify(tag_schema.dump(newTag))
 
 
-@app.route("/items/all", methods = ["GET"])
+@app.route("/items_all", methods = ["GET"])
 def getAllItems():
     itemList = db.session.query(Item).all()
-    result = item_schema.dump(itemList)
+    result = items_schema.dump(itemList)
     return jsonify(result)
 
-@app.route("/items/add", methods = ["POST"])
-def addTag():
-    itemName = request.form["item_name"]
+
+@app.route("/items_add", methods = ["POST"])
+def addItems():
+    
+    itemName = request.json["item_name"]
     newItem = Item(item_name = itemName)
     db.session.add(newItem)
     db.session.commit()
