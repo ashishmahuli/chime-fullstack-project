@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import os
@@ -26,13 +26,44 @@ items_schema = ItemSchema(many = True)
 def ExampleEndpoint():
     result = db.session.query(ExampleModel).filter(ExampleModel.number > 1)
     tag1 = Tag(tag_name = "soup")
+    tag2 = Tag(tag_name = "meat")
     db.session.add(tag1)
+    db.session.add(tag2)
     db.session.commit()
     return {
         "results": "you did it"
     }, 200
 
 
+@app.route("/tags/all", methods = ["GET"])
+def getAllTags():
+    tagList = db.session.query(Tag).all()
+    result = tags_schema.dump(tagList)
+    return jsonify(result)
+
+
+@app.route("/tags/add", methods = ["POST"])
+def addTag():
+    tagName = request.form["tag_name"]
+    newTag = Tag(tag_name = tagName)
+    db.session.add(newTag)
+    db.session.commit()
+    return jsonify(tag_schema.dump(newTag))
+
+
+@app.route("/items/all", methods = ["GET"])
+def getAllItems():
+    itemList = db.session.query(Item).all()
+    result = item_schema.dump(itemList)
+    return jsonify(result)
+
+@app.route("/items/add", methods = ["POST"])
+def addTag():
+    itemName = request.form["item_name"]
+    newItem = Item(item_name = itemName)
+    db.session.add(newItem)
+    db.session.commit()
+    return jsonify(item_schema.dump(newItem))
 
 
 
